@@ -8,8 +8,8 @@
 default map_progress = 0
 
 #Register the keyboard listener
-
-
+default idkpath = 0
+ 
 
 screen key_listener():
     key "K_m" action If(
@@ -18,7 +18,7 @@ screen key_listener():
             SetVariable("map_open", False),
             Stop("music"),
             If(
-                previous_music is not None,
+                previous_music is not None, 
                 Play("music", previous_music, loop=True)
             )
         ],
@@ -59,6 +59,7 @@ label acookingland:
             jump bcookingland
 
         "what happened?":
+            $ idkpath = idkpath + 1
             teaman "WE USED THE SUPER EASY TO CODED MAP TO GET TO"
             teaman "COCKLANDEA!!"
             jump bcookingland
@@ -179,9 +180,15 @@ default map_open = False
 default previous_music = None
 
 
-label openyourmap :
+label openyourmap:
+
     teaman "HERE TO OPEN YOU MAP PRESS M"
-    jump openyourmap
+
+    teaman "GO ON! EXPLORE!"
+
+    $ renpy.pause(hard=True)
+
+    return
         
 
         
@@ -207,13 +214,17 @@ label bcookingland:
     teaman "NO ONE"
     ovengirl "ohhhh don't🔣 say thAt¡ 🈶🈶"
     show ovengirl 
-    ovengirl "now ,hun😏 tell me who🆔 your are?💜"
+    ovengirl "now ,hun😏 tell me who🆔 you are?💜"
     jump thanisthethatthingyousaed
 
 label thanisthethatthingyousaed:
-
     $ yourname = renpy.input("What is your name?")
     $ yourname = yourname.strip()
+
+    if yourname == "":
+        "That is not your name."
+        jump thanisthethatthingyousaed
+
 
 
 menu isthatyourname:
@@ -227,6 +238,7 @@ menu isthatyourname:
             
             
     "i, i don't know":
+        $ idkpath = idkpath + 1
         "well don't worry abot that you can change your name within 2-3 weeks"
         jump contenu
 
@@ -249,18 +261,161 @@ label isthatthatthatyourname:
 
 label contenu:
     ovengirl "🙏oOOooOOoO"
-    ovengirl "[[NAMEHERE] that's a good name💜"
+    ovengirl "[[NAMEHERE] that's a g💮💮d name💜"
     teaman "NO"
     teaman "NO NO"
     teaman "NO NO NO"
     teaman "IT'S PRONOUNCED [yourname]"
-    ovengirl "ohhhhh that's muuuch better¡ (:"
+    show ovengirl hppy
+    ovengirl "ohhhhh that's muuuch better¡ 🧕(:"
+    show ovengirl
+    ovengirl "sayyy🐵, how did 🦖you🦆 meet🪽 [yourname] Rev Ivan?"
+    show teaman ange
+    teaman "I TOLD YOU TO NOT CALL ME THAT IN FRONT OF GUESTS!"
+    show ovengirl winking 
+    ovengirl "oh💅 sorry🦷 MR🧑‍💼 ThE tEa FaIrY :P"
+    show teaman at offscreenleft
+    show teaman:
+        ease 1.0 xalign 2.0
+    teaman "AURRRRR"
+    show ovengirl
+    ovengirl "don't worry 😷about 🫶him😃"
+    ovengirl "tell😃 me more about you🤔"
+    show ovengirl unknow
+    ovengirl "why are you here"
+menu whayareyouhere:
+
+    "i'm doing Work experience (:":
+        show ovengirl
+        ovengirl "oh"
+        ovengirl "work!"
+        ovengirl "well i do love a"
+        show ovengirl thinking
+        ovengirl "urrrrr"
+        show ovengirl hppy
+        ovengirl "a You in uniform"
+        ovengirl "yeah¡"
+        show ovengirl
+        ovengirl "did you know i work from home"
+        ovengirl "i can show you!"
+        jump totheovengirlshome 
+
+    "i didn't know how to make tea and now i'm here":
+        show ovengirl unknow
+        ovengirl "oh"
+        show ovengirl
+        ovengirl "don't worry!"
+        ovengirl "it's teasy"
+        ovengirl "tell you what, we can go to my home i can show you how to make it :D"
+        jump totheovengirlshome
+
+    "idk":
+        $ idkpath = idkpath + 1
+        show ovengirl winking
+        ovengirl "welllll don't worry"
+        show ovengirl hppy
+        ovengirl "i'm sure your here for a reason"
+        show ovengirl
+        ovengirl "come on it's getting late"
+        jump totheovengirlshome
+
+
+label totheovengirlshome:
+    scene ovengirlhome
+    show ovengirl
+    ovengirl "welcome to my house!"
+    ovengirl "it's a little small but i think it's nice"
+    show ovengirl hppy
+    ovengirl "i bet your house is much nicer"
+    show ovengirl thinking
+    ovengirl "Do you"
+    ovengirl "Have a home?"
+    if idkpath > 2:
+        menu doyouhaveahome: 
+            "Do you have a home?"
+
+            "it's outsied of town":
+                show ovengirl hppy
+                ovengirl "oh how exotic!"
+                show ovengirl
+                ovengirl "i knew someone who"
+                jump phonecallforovengirl
+
+            "it's a long way a way":
+                show ovengirl unknow
+                ovengirl "wooooooow"
+                ovengirl "i know how it fills to be far away from home"
+                ovengirl "i lived in"
+                jump phonecallforovengirl
+                
+
+            "it's uhmm well i arr, well i don't really know":
+                show ovengirl thinking
+                ovengirl "oh"
+                ovengirl "how weird"
+                ovengirl "how long have you not re.."
+                jump phonecallforovengirl
+
+    
+ 
+
+
+
+    label phonecallforovengirl:
+        show ovengirl unknow
+        play sound "freesound044209.mp3"
+        
+        ovengirl ""
+        ovengirl "urr i need to get that"
+        
+        show ovengirl:
+            ease 1.0 xalign 2.0
+    $ renpy.pause(3.0, hard=True)
+    jump ovenhomeratsenne
+    
+    
+    label ovenhomeratsenne:
+        unknown "pisss hayyyy"
+        unknown "hay youu"
+        unknown "Hayyy pisss over here!"
+        
+        
+        menu whatdoyousaytotherat030: 
+            "What do you say to the unknown voice?"
+
+            "nothing":
+                unknown "pisss hayyyy"
+                nknown "hhhhhaaaaaayyyy"
+                nknown "pisisiisisiisi"
+                nknown "yoou"
+                jump whatdoyousaytotherat030
+
+
+            "hello?":
+                show ovengirl unknow
+                ovengirl "wooooooow"
+                ovengirl "i know how it fills to be far away from home"
+                ovengirl "i lived in"
+                jump phonecallforovengirl
+                
+
+            "Smart Gas Double Oven Slide-in Range with InstaView ProBake 2.0 do you have a roommate?":
+                show ovengirl thinking
+                ovengirl "oh"
+                ovengirl "how weird"
+                ovengirl "how long have you not re.."
+                jump phonecallforovengirl
+        
+
+    
+label step2oftherat:
+    pass 
+    
     
 
 
+        
 
-
-    
 
 
     #kill me
@@ -397,10 +552,7 @@ label contenu:
 
 
 
-
-
     # This ends the game.
     
 
-    
-    return
+
